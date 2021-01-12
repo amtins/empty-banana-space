@@ -5,72 +5,63 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🍌 🌌 Empty Banana Space</title>
-    <link rel="stylesheet" href="https://unpkg.com/video.js/dist/video-js.css">
     <style>
         body {
             background-color: #111;
             color: white;
-        }
-        button {
-            background: #222;
             
-            border: none;
-            border-radius: 5px;
+            display: flex;
+            
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
 
-            margin: 10px 10px 10px 0;
-            padding: 20px;
-
-            color: white;
-        }
-        textarea {
-            display: block;
-            resize: none;
-
-            background: black;
-            border: none;
-
-            overflow-y: scroll;
-
-            width: 640px;
-            margin-top: 20px;
-
-            color: greenyellow;
+            height: 100vh;
+            
+            margin: 0;
         }
     </style>
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const url = new URL(location.toString());
+            let version = url.searchParams.has('version') ? `@${url.searchParams.get('version')}` : '';
+
+            const script = document.createElement('script');
+            const link = document.createElement('link');
+            const src = `https://unpkg.com/video.js${version}/dist/video.js`;
+            const css = `https://unpkg.com/video.js${version}/dist/video-js.css`;
+
+            link.rel = 'stylesheet';
+            link.href = css;
+            document.head.appendChild(link);
+
+            script.async = true;
+            script.defer = 'defer';
+            script.src = src;
+            script.type = 'text/javascript';
+
+            script.onload = () => {
+                const source = {
+                    src: 'https://tribeofnoisestorage.blob.core.windows.net/music/017a2445d75780298f6be9c7802b33a9.mp3'
+                };
+                const player = new videojs('player');
+                player.src(source);
+
+                document.querySelector('h1').textContent = `${document.querySelector('h1').textContent} ${videojs.VERSION}`;
+                window.player = player;
+            };
+
+            document.body.appendChild(script);
+        });
+    </script>
 </head>
 
 <body>
-    <audio width="640" height="480" id="player" controls muted
+    <h1>video.js version</h1>
+    <audio playsinline="playsinline" width="640" height="480" id="player" controls muted
         class="video-js vjs-show-big-play-button-on-pause player"></audio>
-        
-    <button id="loadMedia">loadMedia 🌌</button>
-    <button id="src">src 🍌</button>
-    
-    <textarea disabled id="console" cols="30" rows="10"></textarea>
-
-    <script src="https://unpkg.com/video.js/dist/video.js"></script>
-    <script>
-        const source = {
-            src: 'https://tribeofnoisestorage.blob.core.windows.net/music/017a2445d75780298f6be9c7802b33a9.mp3'
-            // src: 'https://rtsww-a-d.rts.ch/la-1ere/programmes/forum/2018/forum_20180227_standard_developpement-6_cdf720e1-d628-4c1a-8653-8d4f65c78a3a-128k.mp3?mediaId=9348471'
-        };
-        const player = new videojs('player');
-
-        player.on('emptied', (e)=>{
-            console.log(e);
-            document.querySelector('#console').value += e.type+'\n';
-        });
-        player.src(source);
-
-        document.querySelector('#loadMedia').addEventListener('click', (e)=>{
-            e.preventDefault();
-            player.loadMedia(source);
-        });
-        document.querySelector('#src').addEventListener('click', (e)=>{
-            e.preventDefault();
-            player.src(source);
-        });
-    </script>
 </body>
 
 </html>
