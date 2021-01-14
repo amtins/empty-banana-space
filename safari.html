@@ -9,15 +9,15 @@
         body {
             background-color: #111;
             color: white;
-            
+
             display: flex;
-            
+
             flex-direction: column;
             align-items: center;
             justify-content: center;
 
             height: 100vh;
-            
+
             margin: 0;
         }
     </style>
@@ -26,7 +26,7 @@
 <body>
     <h1>Muted player</h1>
     <audio playsinline="playsinline" width="640" height="480" id="player" controls muted
-    src="https://tribeofnoisestorage.blob.core.windows.net/music/017a2445d75780298f6be9c7802b33a9.mp3"></audio>
+        src="https://tribeofnoisestorage.blob.core.windows.net/music/017a2445d75780298f6be9c7802b33a9.mp3"></audio>
     <button id="btn">play</button>
 
     <h1>Unmuted player</h1>
@@ -37,9 +37,13 @@
         const p2 = document.querySelector('#player2');
         const btn = document.querySelector('#btn');
 
-        btn.addEventListener('click', (e)=>{
+        p.addEventListener('ended', (e) => {
+            console.log('ended', e);
+        })
+
+        btn.addEventListener('click', (e) => {
             e.preventDefault();
-            p.play().then((x)=>{console.log('Resolve', x)}).catch((y)=>{console.log('catch', y)});   
+            p.play().then((x) => { console.log('Resolve', x) }).catch((y) => { console.log('catch', y) });
         })
 
     </script>
