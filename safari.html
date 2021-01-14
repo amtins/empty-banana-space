@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🍌 🌌 Empty Banana Space</title>
+    <style>
+        body {
+            background-color: #111;
+            color: white;
+            
+            display: flex;
+            
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            height: 100vh;
+            
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Muted player</h1>
+    <audio playsinline="playsinline" width="640" height="480" id="player" controls muted
+    src="https://tribeofnoisestorage.blob.core.windows.net/music/017a2445d75780298f6be9c7802b33a9.mp3"></audio>
+    <button id="btn">play</button>
+
+    <h1>Unmuted player</h1>
+    <audio playsinline="playsinline" width="640" height="480" id="player2" controls
+        src="https://tribeofnoisestorage.blob.core.windows.net/music/017a2445d75780298f6be9c7802b33a9.mp3"></audio>
+    <script>
+        const p = document.querySelector('#player');
+        const p2 = document.querySelector('#player2');
+        const btn = document.querySelector('#btn');
+
+        btn.addEventListener('click', (e)=>{
+            e.preventDefault();
+            p.play().then(console.log).catch(console.log);   
+        })
+
+    </script>
+</body>
+
+</html>
