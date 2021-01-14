@@ -39,7 +39,7 @@
 
         btn.addEventListener('click', (e)=>{
             e.preventDefault();
-            p.play().then(console.log).catch(console.log);   
+            p.play().then((x)=>{console.log('Resolve', x)}).catch((y)=>{console.log('catch', y)});   
         })
 
     </script>
